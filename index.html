@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Meu site completo</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<style>
+	    #caixa {
+	        width: 50px;
+	        height: 50px;
+	        background-color: red;
+	        position: relative;
+	    }
+	</style>
+</head>
+<body>
+
+	<section id="contacto">
+		<h2>Contacto</h2>
+		<form id="formulario">
+			<label for="nome">Nome:</label>
+			<input type="text" id="nome" placeholder="O teu nome">
+			<label for="email">Email:</label>
+			<input type="email" id="email" placeholder="O teu email">
+			<label for="mensagem">Mensagem:</label>
+			<textarea id="mensagem" placeholder="Escreve a tua mensagem"></textarea>
+			<button type="submit">Enviar</button>
+		</form>
+		<p id="resposta"></p>
+	</section>
+
+	<section id="interacao">
+	    <h2>Interatividade com JavaScript</h2>
+	    <button id="toggle-btn">Mostrar Mensagem</button>
+	    <p id="mensagem" style="display: none;">Olá! Agora já sabes usar JavaScript! 🎉</p>
+	</section>
+
+	<nav class="navbar">
+	    <div class="menu-toggle">&#9776;</div>
+	    <ul class="nav-links">
+	        <li><a href="#sobre">Sobre</a></li>				
+	        <li><a href="#galeria">Galeria</a></li>
+	        <li><a href="#contacto">Contacto</a></li>
+	    </ul>
+	</nav>
+
+	<section id="sobre">
+	    <h1>Bem-vindo ao meu site</h1>
+	    <p>Este é um site criado com HTML e CSS. Aqui aprendes a programar páginas web do zero</p>
+	</section>
+
+	<!-- Galeria de Imagens -->
+	<section id="galeria">
+	    <h2>Galeria de Imagens</h2>
+	    <div class="grid-container">
+	        <div class="item"><img src="img/5.png" alt="🖼️ 1" height="90%" width="90%"></div>
+	        <div class="item"><img src="img/6.png" alt="🖼️ 2" height="90%" width="90%"></div>
+	        <div class="item"><img src="img/7.jpg" alt="🖼️ 3" height="90%" width="90%"></div>
+	        <div class="item"><img src="img/8.jpg" alt="🖼️ 4" height="90%" width="90%"></div>
+	    </div>
+	</section>
+
+	<!-- Rodapé -->
+	<footer>
+	    <p>&copy; 2025 Meu site. Todos os direitos reservados.</p>
+	</footer>
+
+	<!-- JavaScript para o Menu -->
+	<script>
+	    document.querySelector(".menu-toggle").addEventListener("click", function(){
+	        document.querySelector(".nav-links").classList.toggle("active");
+	    });
+	</script>
+
+	<!-- JavaScript para o botão de interação -->
+	<script>
+	    document.addEventListener("DOMContentLoaded", function() {
+	        document.getElementById("toggle-btn").addEventListener("click", function() {
+	            let mensagem = document.getElementById("mensagem");
+	            if (mensagem.style.display === "none") {
+	                mensagem.style.display = "block";
+	                this.textContent = "Esconder Mensagem";
+	            } else {
+	                mensagem.style.display = "none";
+	                this.textContent = "Mostrar Mensagem";
+	            }
+	        });
+	    });
+	</script>
+
+	<!-- Botão de alerta -->
+	<button onclick="mostrarAlerta()">Clica Aqui</button>
+	<script>
+	    function mostrarAlerta(){
+	        alert("Parabéns já sabes usar JavaScript! 🚀");
+	    }
+	</script>
+
+	<!-- Caixa animada -->
+	<div id="caixa"></div>
+	<button onclick="moverCaixa()">Mover</button>
+
+	<script>
+	    function moverCaixa() {
+	        let caixa = document.getElementById("caixa");
+	        let posicao = 0;
+	        let intervalo = setInterval(frame, 10);
+
+	        function frame() {
+	            if (posicao >= 200) {
+	                clearInterval(intervalo);
+	            } else {
+	                posicao++;
+	                caixa.style.left = posicao + "px";
+	            }
+	        }
+	    }
+	</script>
+
+	<script>
+    document.getElementById("formulario").addEventListener("submit", function(event) {
+        event.preventDefault(); // Impede o envio do formulário
+
+        let nome = document.getElementById("nome").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let mensagem = document.getElementById("mensagem").value.trim();
+        let resposta = document.getElementById("resposta");
+
+        if (nome === "" || email === "" || mensagem === "") {
+            resposta.textContent = "⚠️ Preenche todos os campos!";
+            resposta.style.color = "red";
+        } else {
+
+        	// Guardar no localStorage
+        	localStorage.setItem("nome", nome);
+        	localStorage.setItem("email", email);
+        	localStorage.setItem("mensagem", mensagem);
+
+            resposta.textContent = "✅ Mensagem enviada com sucesso!";
+            resposta.style.color = "green";
+        }
+    });
+</script>
+<script>
+	// Recuperar os dados do localStorage
+	document.getElementById("nome").value = localStorage.getItem("nome") || "";
+	document.getElementById("email").value = localStorage.getItem("email") !! "";
+	document.getElementById("mensagem").value = localStorage.getItem("mensagem") !! "";
+</script>
+
+
+</body>
+</html>
